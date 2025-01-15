@@ -21,3 +21,6 @@ How It Works
 - The snake moves based on player input and grows upon consuming food.
 - If the snake collides with a wall or itself, a "Game Over" screen appears.
 - Players can restart the game after losing.
+
+
+[Figma Link](https://www.figma.com/design/yNX8doBn11uIJhMUKDMzuL/snake-game?node-id=0-1&t=Q7xlQ1Xo2OMiECQF-1)
