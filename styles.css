@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+#board {
+    display: grid;
+    grid-template-rows: repeat(12, 1fr);
+    grid-template-columns: repeat(12, 1fr);
+    width: 869px;
+    height: 428px;
+    border: 1px solid #000;
+    position: absolute; /* Use absolute positioning */
+    top: 47%; /* Adjust the top position */
+    left: 50%; /* Adjust the left position */
+    transform: translate(-50%, -50%); /* Center the play board */
+}
+
+.head, .snake, .food {
+    width: 37px; /* Adjust the width */
+    height: 37px; /* Adjust the height */
+}
+
+.head {
+    background-color: green;
+}
+
+.snake {
+    background-color: lightgreen;
+}
+
+.food {
+    background-color: red;
+}
+
+
+
+
+/* Specific background images for each page */
+.intro-page {
+    background-image: url('images/Main_Game_Page.png');
+}
+
+.start-page {
+    background-image: url('images/Start_Game_Page.png');
+}
+
+.game-page {
+    background-image: url('images/Game_Area_Page.png');
+}
+
+.gameover-page {
+    background-image: url('images/Game_Over_Page.png');
+}
+
+.please-click-anywhere {
+    position: absolute;
+    bottom: 10%;
+    left: 10%; /* Adjust the left position */
+    color: black; /* Text color */
+    font-size: 16px; /* Adjust the font size */
+}
+
+/* Positioning the button */
+button {
+    position: absolute;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.start-page button {
+    bottom: -1%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.gameover-page button {
+    bottom: 23%;
+    right: 43%;
+    transform: translate(-50%, -50%);
+}
+
+.gameover-page button:nth-child(2) {
+    bottom: 23%;
+    left: 68%;
+    transform: translate(-50%, -50%);
+}
+
+/* General button styles */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: white; /* Text color */
+    background-size: cover; /* Ensure the image covers the entire button */
+    background-position: center; /* Center the image */
+}
+
+/* Specific button sizes */
+.start-page button {
+    width: 260px; /* Adjust the width */
+    height: 75px; /* Adjust the height */
+    font-size: 18px; /* Adjust the font size */
+}
+
+.gameover-page button {
+    width: 260px; /* Adjust the width */
+    height: 75px; /* Adjust the height */
+    font-size: 18px; /* Adjust the font size */
+}
+
+/* Specific button background image */
+.start-page button {
+    background-image: url('images/Start_Game_Button.png');
+}
+
+.gameover-page button {
+    background-image: url('images/Game_Over_Button_1.png');
+}
+
+.gameover-page button:nth-child(2) {
+    background-image: url('images/Game_Over_Button_2.png');
+}
