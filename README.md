@@ -2,7 +2,7 @@
 Snake Game Website:
 
 Overview
-Snake Game provides a simple, fun, and engaging online experience where players control a snake that grows by eating apple while avoiding collisions, including hitting its own body,  The primary goal is to have fun with responsive and fluid gameplay,  making it the beloved childhood game that many remember fondly.
+Snake Game provides a simple, fun, and engaging online experience where players control a snake that grows by eating apples while avoiding collisions, including hitting its own body,  The primary goal is to have fun with responsive and fluid gameplay,  making it the beloved childhood game that many remember fondly.
 
 Objectives
 - Create an easy-to-play game that is suitable for all ages.
