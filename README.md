@@ -23,4 +23,4 @@ How It Works
 
 [Figma Link](https://www.figma.com/design/yNX8doBn11uIJhMUKDMzuL/snake-game?node-id=0-1&t=Q7xlQ1Xo2OMiECQF-1)
 [Trello_Link](https://trello.com/invite/b/675965ce76060378c431dccf/ATTIff547e965e2d46253beaeced285fad890AC9E506/snake-game)
-
+[Document](https:https://docs.google.com/document/d/1CKHz5k1uT40UKxxJkjP4Va1k0zZDPhYxGiAzjV3bRCM/edit?tab=t.0)
