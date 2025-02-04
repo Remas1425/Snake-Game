@@ -1,5 +1,5 @@
 # Snake-Game
-Snake Game Website:
+Snake Game Website
 
 Overview:
 
