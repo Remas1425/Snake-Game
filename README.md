@@ -1,20 +1,24 @@
 # Snake-Game
 Snake Game Website:
 
-Overview
+Overview:
+
 Snake Game provides a simple, fun, and engaging online experience where players control a snake that grows by eating apples while avoiding collisions, including hitting its own body,  The primary goal is to have fun with responsive and fluid gameplay,  making it the beloved childhood game that many remember fondly.
 
-Objectives
+Objectives:
+
 - Create an easy-to-play game that is suitable for all ages.
 - Ensure seamless functionality across laptops and desktops.
 
-Features
+Features:
+
 -Start/Restart Game: Players can initiate a new game or restart after a loss.
 - Snake Movement: Control the snake using arrow keys.
 - Food and Scoring: Eating food increases the snake's length.
 - Game Over Screen: Display options to restart or exit.
 
-How It Works
+How It Works:
+
 - Players click "Start" to begin the game.
 - The snake moves based on player input and grows upon consuming food.
 - If the snake collides with a wall or itself, a "Game Over" screen appears.
