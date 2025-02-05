@@ -1,109 +1,125 @@
-const board = document.getElementById('board');
+// تحديد العناصر الأساسية
+const initialImage = document.getElementById('initialImage');
+// Get canvas and set dimensions
+const canvas = document.getElementById('gameCanvas');
+const context = canvas.getContext('2d');
+canvas.width = 800;
+canvas.height = 600;
 
-let inputDir = {x: 0, y: 0}; 
-const foodSound = new Audio('music/food.mp3');
-const gameOverSound = new Audio('music/gameover.mp3');
-const moveSound = new Audio('music/move.mp3');
-const musicSound = new Audio('music/music.mp3');
-const speed = 10; // Set a fixed speed value
-let lastPaintTime = 0;
-let snakeArr = [
-    {x: 13, y: 15}
-];
+// Define game variables
+const box = 32;
+let snake = [{ x: 9 * box, y: 10 * box }];
+let food = generateFood();
+let direction = "RIGHT";
+let gameSpeed = 150;
+let game;
 
-let food = {x: 6, y: 7};
+// Load sounds
+const moveSound = new Audio('Move Snake Game.mp3');
+const gameOverSound = new Audio('Game Over Snake Game.mp3');
+const foodSound = new Audio('Food Snake Game.mp3');
 
-function main(ctime) {
-    window.requestAnimationFrame(main);
-    if((ctime - lastPaintTime)/1000 < 1/speed){
-        return;
-    }
-    lastPaintTime = ctime;
-    gameEngine();
+// Event listener for keyboard input
+document.addEventListener("keydown", changeDirection);
+
+// Function to start the game
+function startGame() {
+    game = setInterval(draw, gameSpeed);
 }
 
-function isCollide(snake) {
-    for (let i = 1; i < snakeArr.length; i++) {
-        if(snake[i].x === snake[0].x && snake[i].y === snake[0].y){
-            return true;
-        }
-    }
-    if(snake[0].x >= 18 || snake[0].x <=0 || snake[0].y >= 18 || snake[0].y <=0){
-        return true;
-    }
-    return false;
+// Function to generate food at a random position
+function generateFood() {
+    return {
+        x: Math.floor(Math.random() * (canvas.width / box)) * box,
+        y: Math.floor(Math.random() * (canvas.height / box)) * box
+    };
 }
 
-function gameEngine(){
-    if(isCollide(snakeArr)){
-        gameOverSound.play();
-        musicSound.pause();
-        inputDir =  {x: 0, y: 0}; 
-        window.location.href = 'gameover.html';
-        return;
+// Function to change direction
+function changeDirection(event) {
+    const keyDirectionMap = {
+        37: 'LEFT',
+        38: 'UP',
+        39: 'RIGHT',
+        40: 'DOWN'
+    };
+    const newDirection = keyDirectionMap[event.keyCode];
+    if (newDirection && newDirection !== getOppositeDirection(direction)) {
+        direction = newDirection;
+        moveSound.play();
     }
+}
 
-    if(snakeArr[0].y === food.y && snakeArr[0].x === food.x){
-        foodSound.play();
-        snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y});
-        food = {x: Math.floor(Math.random() * 18) + 1, y: Math.floor(Math.random() * 18) + 1};
-    }
+// Function to draw the game
+function draw() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
 
-    for (let i = snakeArr.length - 2; i >= 0; i--) { 
-        snakeArr[i+1] = {...snakeArr[i]};
-    }
+    // Draw food
+    context.fillStyle = "red";
+    context.fillRect(food.x, food.y, box, box);
 
-    snakeArr[0].x += inputDir.x;
-    snakeArr[0].y += inputDir.y;
-
-    board.innerHTML = "";
-    snakeArr.forEach((e, index)=>{
-        let snakeElement = document.createElement('div');
-        snakeElement.style.gridRowStart = e.y;
-        snakeElement.style.gridColumnStart = e.x;
-
-        if(index === 0){
-            snakeElement.classList.add('head');
-        }
-        else{
-            snakeElement.classList.add('snake');
-        }
-        board.appendChild(snakeElement);
+    // Draw snake
+    snake.forEach((segment, index) => {
+        context.fillStyle = index === 0 ? "darkgreen" : "lightgreen";
+        context.fillRect(segment.x, segment.y, box, box);
+        context.strokeStyle = "darkgreen";
+        context.strokeRect(segment.x, segment.y, box, box);
     });
 
-    let foodElement = document.createElement('div');
-    foodElement.style.gridRowStart = food.y;
-    foodElement.style.gridColumnStart = food.x;
-    foodElement.classList.add('food');
-    board.appendChild(foodElement);
+    // Move snake
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    if (direction === "LEFT") snakeX -= box;
+    if (direction === "UP") snakeY -= box;
+    if (direction === "RIGHT") snakeX += box;
+    if (direction === "DOWN") snakeY += box;
+
+    // Check if snake eats food
+    if (snakeX === food.x && snakeY === food.y) {
+        foodSound.play();
+        food = generateFood();
+    } else {
+        snake.pop();
+    }
+
+    // New head
+    const newHead = { x: snakeX, y: snakeY };
+
+    // Check collisions
+    if (isCollision(newHead) || isOutOfBound(newHead)) {
+        endGame();
+    } else {
+        snake.unshift(newHead);
+    }
 }
 
-musicSound.play();
-window.requestAnimationFrame(main);
-window.addEventListener('keydown', e =>{
-    inputDir = {x: 0, y: 1};
-    moveSound.play();
-    switch (e.key) {
-        case "ArrowUp":
-            inputDir.x = 0;
-            inputDir.y = -1;
-            break;
+// Function to check for collisions
+function isCollision(head) {
+    return snake.some(segment => head.x === segment.x && head.y === segment.y);
+}
 
-        case "ArrowDown":
-            inputDir.x = 0;
-            inputDir.y = 1;
-            break;
+// Function to check if snake goes out of bounds
+function isOutOfBound(head) {
+    return head.x < 0 || head.y < 0 || head.x >= canvas.width || head.y >= canvas.height;
+}
 
-        case "ArrowLeft":
-            inputDir.x = -1;
-            inputDir.y = 0;
-            break;
+// Function to end game
+function endGame() {
+    clearInterval(game);
+    gameOverSound.play();
+    setTimeout(() => {
+        window.location.href = "gameover.html";
+    }, 1500);
+}
 
-        case "ArrowRight":
-            inputDir.x = 1;
-            inputDir.y = 0;
-            break;
-        default:
-            break;
-    }
-});
+// Function to get the opposite direction
+function getOppositeDirection(direction) {
+    const opposites = { "LEFT": "RIGHT", "RIGHT": "LEFT", "UP": "DOWN", "DOWN": "UP" };
+    return opposites[direction];
+}
+
+// Start game when page loads
+window.onload = function() {
+    startGame();
+};

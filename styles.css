@@ -8,57 +8,19 @@ body {
     height: 100vh;
     background-size: cover;
     background-position: center;
-    position: relative;
 }
 
-#board {
+#gameCanvas {
     display: grid;
-    grid-template-rows: repeat(12, 1fr);
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(10, 10fr);
+    grid-template-rows: repeat(10, 10fr);
     width: 869px;
     height: 428px;
     border: 1px solid #000;
     position: absolute; /* Use absolute positioning */
     top: 47%; /* Adjust the top position */
     left: 50%; /* Adjust the left position */
-    transform: translate(-50%, -50%); /* Center the play board */
-}
-
-.head, .snake, .food {
-    width: 37px; /* Adjust the width */
-    height: 37px; /* Adjust the height */
-}
-
-.head {
-    background-color: green;
-}
-
-.snake {
-    background-color: lightgreen;
-}
-
-.food {
-    background-color: red;
-}
-
-
-
-
-/* Specific background images for each page */
-.intro-page {
-    background-image: url('images/Main_Game_Page.png');
-}
-
-.start-page {
-    background-image: url('images/Start_Game_Page.png');
-}
-
-.game-page {
-    background-image: url('images/Game_Area_Page.png');
-}
-
-.gameover-page {
-    background-image: url('images/Game_Over_Page.png');
+    transform: translate(-50%, -50%);
 }
 
 .please-click-anywhere {
@@ -69,27 +31,28 @@ body {
     font-size: 16px; /* Adjust the font size */
 }
 
-/* Positioning the button */
 button {
-    position: absolute;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
 }
 
 .start-page button {
+    position: absolute;
     bottom: -1%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
 .gameover-page button {
+    position: absolute;
     bottom: 23%;
     right: 43%;
     transform: translate(-50%, -50%);
 }
 
 .gameover-page button:nth-child(2) {
+    position: absolute;
     bottom: 23%;
     left: 68%;
     transform: translate(-50%, -50%);
@@ -132,3 +95,20 @@ button {
 .gameover-page button:nth-child(2) {
     background-image: url('images/Game_Over_Button_2.png');
 }
+
+.intro-page {
+    background-image: url('images/Main_Game_Page.png');
+}
+
+.start-page {
+    background-image: url('images/Start_Game_Page.png');
+}
+
+.game-page {
+    background-image: url('images/Game_Area_Page.png');
+}
+
+.gameover-page {
+    background-image: url('images/Game_Over_Page.png');
+}
+
